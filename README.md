@@ -36,3 +36,9 @@ A project that contains MSTest unit tests. (C#, Windows, Test)
 8. Os teste automatizados foram executados 10 vezes consecutivas e todos os testes foram bem sucedidos.
 
 ![image](https://github.com/user-attachments/assets/3234a091-4500-44ac-8f50-3b2f2371ab86)
+
+4.Casos de Teste:
+- TC01 - Validating the operation of selecting a sub-option in the Menu
+- TC02 - Validation of the attempt to send an empty form.
+- TC03 - Validation of the attempt to send an invalid form.
+- TC04 - Validation of the attempt to submit the form without checking the Recaptcha.

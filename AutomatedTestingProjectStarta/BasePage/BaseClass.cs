@@ -10,22 +10,22 @@ namespace AutomatedTestingProjectStarta.BasePage
     public class BaseClass
     {
         public static IWebDriver driver;
-        public TestContext TestContext { get; set; } // Para acessar o nome do teste, status e etc.
+        public TestContext TestContext { get; set; } // To access the test name, status, etc.
         [TestInitialize]
 
         public void Init()
         {
-            KillDriverProcesses(); // (Opcional) Finaliza processos travados do ChromeDriver
+            KillDriverProcesses(); // (Optional) Terminates stuck ChromeDriver processes
 
             var options = new ChromeOptions();
-            options.AddArgument("--start-maximized"); // Inicia com a janela maximizada
+            options.AddArgument("--start-maximized"); // Starts with the window maximized
 
             driver = new ChromeDriver(options);
-            driver.Manage().Timeouts().PageLoad = TimeSpan.FromSeconds(90); // Tempo máximo de carregamento da página
+            driver.Manage().Timeouts().PageLoad = TimeSpan.FromSeconds(90); // Maximum page load time
             driver.Navigate().GoToUrl("https://starta.site/");
             driver.Manage().Window.Maximize();
 
-            // Aguarda o carregamento completo da página (document.readyState === "complete")
+            // Wait for the page to load completely (document.readyState === "complete")
             WebDriverWait wait = new WebDriverWait(driver, TimeSpan.FromSeconds(20));
             wait.Until(d =>
                 ((IJavaScriptExecutor)d).ExecuteScript("return document.readyState").Equals("complete"));
@@ -38,8 +38,8 @@ namespace AutomatedTestingProjectStarta.BasePage
             {
                 try
                 {
-                    driver.Quit(); // Encerra a sessão do navegador corretamente
-                    driver.Dispose(); // Libera memória e recursos
+                    driver.Quit(); // Closes the browser session correctly
+                    driver.Dispose(); // Frees memory and resources
                 }
                 catch (Exception e)
                 {
@@ -48,7 +48,7 @@ namespace AutomatedTestingProjectStarta.BasePage
             }
         }
 
-        // Mata processos zumbis do ChromeDriver entre execuções consecutivas
+        // Kill ChromeDriver zombie processes between consecutive runs
         private void KillDriverProcesses()
         {
             foreach (var process in Process.GetProcessesByName("chromedriver"))
